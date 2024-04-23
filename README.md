@@ -5,7 +5,7 @@ pdfViewer component for Qodly studio
 ## PdfViewer
 
 An efficient PDF viewer component with customizable features
-![pdfViewer](C:\Users\HP\Desktop\qodly_pdfviewer\public\pdfViewer.png)
+![pdfViewer](public/pdfViewer.png)
 
 ## Properties
 
