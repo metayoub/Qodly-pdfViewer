@@ -27,10 +27,7 @@ export default {
         label: 'On Click',
         value: 'onclick',
       },
-      {
-        label: 'On Blur',
-        value: 'onblur',
-      },
+
       {
         label: 'On Focus',
         value: 'onfocus',
@@ -42,14 +39,6 @@ export default {
       {
         label: 'On MouseLeave',
         value: 'onmouseleave',
-      },
-      {
-        label: 'On KeyDown',
-        value: 'onkeydown',
-      },
-      {
-        label: 'On KeyUp',
-        value: 'onkeyup',
       },
     ],
     datasources: {
