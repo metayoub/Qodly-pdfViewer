@@ -16,12 +16,13 @@ const Settings: TSetting[] = [
     type: ESetting.GROUP,
     components: commonSettings,
   },
-  ...DEFAULT_SETTINGS,
+
+  ...load(DEFAULT_SETTINGS).filter('style.overflow', 'background', 'color', 'font'),
 ];
 
 export const BasicSettings: TSetting[] = [
   ...commonSettings,
-  ...load(BASIC_SETTINGS).filter('style.overflow'),
+  ...load(BASIC_SETTINGS).filter('style.overflow', 'background', 'color', 'font'),
 ];
 
 export default Settings;
