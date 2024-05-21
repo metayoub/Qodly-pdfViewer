@@ -3,9 +3,11 @@ import cn from 'classnames';
 import { IPdfViewerProps } from './PdfViewer.config';
 import { useRenderer, useSources } from '@ws-ui/webform-editor';
 
-const PdfViewer: FC<IPdfViewerProps> = ({ pdfLink, style, className, classNames = [] }) => {
+const PdfViewer: FC<IPdfViewerProps> = ({ style, className, classNames = [] }) => {
   const { connect } = useRenderer();
-  const [_value, setValue] = useState(() => pdfLink);
+  const [value, setValue] = useState<any>(null);
+  const [pdfSource, setPdfSource] = useState<any>(null);
+
   const {
     sources: { datasource: ds },
   } = useSources();
@@ -13,11 +15,10 @@ const PdfViewer: FC<IPdfViewerProps> = ({ pdfLink, style, className, classNames 
   useEffect(() => {
     if (!ds) return;
 
-    const listener = async (/* event */) => {
-      const v = await ds.getValue<string>();
-      setValue(v || pdfLink);
+    const listener = async () => {
+      const v = await ds.getValue<any>();
+      setValue(v);
     };
-
     listener();
 
     ds.addListener('changed', listener);
@@ -25,25 +26,44 @@ const PdfViewer: FC<IPdfViewerProps> = ({ pdfLink, style, className, classNames 
     return () => {
       ds.removeListener('changed', listener);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ds]);
+
+  useEffect(() => {
+    const getPdf = async () => {
+      if (!value) return;
+
+      let url = null;
+
+      try {
+        const val = JSON.parse(value);
+
+        const resp = await fetch(val.__deferred.uri);
+        const arrayBuffer = await resp.arrayBuffer();
+        const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+        url = URL.createObjectURL(blob);
+
+        setPdfSource(url);
+      } catch (error) {
+        console.error('Error fetching PDF:', error);
+      }
+    };
+
+    getPdf();
+  }, [value]);
 
   return (
     <div ref={connect} style={style} className={cn(className, classNames)}>
-      {pdfLink ? (
-       <div className="w-full h-full border border-gray-300">
-       <iframe
-         title="PDF Viewer"
-         src={`https://docs.google.com/viewer?url=${pdfLink}&embedded=true`}
-         className="w-full h-full border-none"
-       ></iframe>
-     </div>
-     
-      ) : (
-        <div className="w-full h-full flex items-center justify-center text-gray-500">
-          No files to display...
-        </div>
-      )}
+      <div className="w-full h-full border border-gray-300">
+        {pdfSource ? (
+          <embed src={pdfSource} width="100%" height="100%" />
+        ) : value ? (
+          <embed src={value} width="100%" height="100%" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-500">
+            No files to display...
+          </div>
+        )}
+      </div>
     </div>
   );
 };

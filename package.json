@@ -23,8 +23,7 @@
     "@ws-ui/webform-editor": "0.2.25",
     "pdfjs-dist": "^4.0.379",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-pdf": "^7.7.1"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@qodly/cli": "^0.1.44",
