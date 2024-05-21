@@ -8,6 +8,13 @@ import PdfViewerSettings, { BasicSettings } from './PdfViewer.settings';
 export default {
   craft: {
     displayName: 'PdfViewer',
+    sanityCheck: {
+      keys: [{ name: 'datasource', require: true, isDatasource: true }],
+    },
+    requiredFields: {
+      keys: ['datasource'],
+      all: false,
+    },
     kind: EComponentKind.BASIC,
     props: {
       name: '',
@@ -42,14 +49,14 @@ export default {
       },
     ],
     datasources: {
-      accept: ['string'],
+      accept: ['blob', 'string'],
     },
   },
   defaultProps: {
-    pdfLink: '',
+  
   },
 } as T4DComponentConfig<IPdfViewerProps>;
 
 export interface IPdfViewerProps extends webforms.ComponentProps {
-  pdfLink?: any;
+  
 }
