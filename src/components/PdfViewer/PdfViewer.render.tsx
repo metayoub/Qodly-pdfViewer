@@ -55,9 +55,9 @@ const PdfViewer: FC<IPdfViewerProps> = ({ style, className, classNames = [] }) =
     <div ref={connect} style={style} className={cn(className, classNames)}>
       <div className="w-full h-full border border-gray-300">
         {pdfSource ? (
-          <embed src={pdfSource} width="100%" height="100%" />
+          <iframe src={pdfSource} width="100%" height="100%" />
         ) : value ? (
-          <embed src={value} width="100%" height="100%" />
+          <iframe src={value} width="100%" height="100%" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-500">
             No files to display...
