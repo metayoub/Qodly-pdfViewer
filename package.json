@@ -17,13 +17,16 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,jsx,html,css}\""
   },
   "dependencies": {
+    "@ws-ui/craftjs-core":"^0.2.13",
+    "@ws-ui/craftjs-layers": "0.2.4",
+    "@ws-ui/craftjs-utils": "0.2.2",
     "@ws-ui/webform-editor": "0.3.28",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "pdfjs-dist": "^4.0.379"
   },
-  "devDependencies": {
-    "@qodly/cli": "^0.2.14",
+  "devDependencies": { 
+    "@qodly/cli": "^0.2.15",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
